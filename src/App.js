@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import HeaderComponent from './components/Header';
+import BodyComponent from './components/Body';
 
+/* 两种写法 class HeaderComponent extends Component function App() */
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div  >
+      <HeaderComponent />
+      <BodyComponent />
+     </div>
   );
 }
+
+
+/* class HeaderComponent extends Component {
+
+  render() {
+    return (
+      <div>   
+        <h1>this is a hdeader </h1>
+        <hr />
+      </div>
+
+    );
+
+
+  }
+} */
+
+    
 
 export default App;
