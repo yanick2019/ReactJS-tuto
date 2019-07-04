@@ -95,13 +95,25 @@ class Block4 extends Component {
 class Block5 extends Component {
     render() {
         return (
-            <div>
+
+            <div className="card mt-2" style={{ width: '50rem' }} >
                 循环渲染
-                 <p>title: this.post.title</p>
-                <p>content: this.post.content</p>
-                <hr />
+                <div className="card-body">
+                    <h5 className="card-title">Card title   {this.props.post.title} </h5>
+                    <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+
+                    <p className="card-text">{this.props.post.content}</p>
+                    <a href="#" className="btn btn-primary">Go somewhere</a>
+                    <a href="#" className="card-link">Card link</a>
+                    <a href="#" className="card-link">Another link</a>
+                </div>
             </div>
+
+
+
+
         )
+
     }
 }
 
@@ -109,59 +121,92 @@ class Block5 extends Component {
 
 
 
-function Body() {
-
-    const post = {
-        title: "title post ",
-        content: "content post Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus odit eos, voluptate dolores necessitatibus perferendis eius "
+class Body extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            ownposts: [],
+            isLoading: false,
+            hasError: false,
+            fetchError: ""
+        }
     }
-    // 循环渲染
-    const posts = [
-        {
-            id:"1", // 不写key key={post.id}  会在console里报错 
-            title: " title xunhuan 1 ",
-            content: " content xunhuan 1 "
-        },
-        {id:"2",
-            title: " title xunhuan2 ",
-            content: " content xunhuan 2 "
-        },
-        {id:"3",
-            title: " title xunhuan 3 ",
-            content: " content xunhuan 3 "
-        },
-        {id: "4" ,
-            title: " title xunhuan 4 ",
-            content: " content xunhuan 4 "
-        },
 
-    ];
-    let element = posts.map(
-        (post ) => (
+    //相当于vuejs 里的mounted 方法
+    componentDidMount() {
+        this.setState({ isLoading: true });
+        fetch('http://localhost:3001/posts').then(
+            // 简写response=>response.ok
+            // 非简写response=>{ return response.json() }
 
-        <Block5 key={post.id} post={post} />
+            response => {
+                if (response.ok) { return response.json(); } else { throw new Error("this is error throwed " + response.statusText) }
+
+            }
         )
-    
-    )
+            .then(
+                data => this.setState({ ownposts: data, isLoading: false })
+            )
+            .catch(
+                error => {
+                    this.setState({ hasError: true, isLoading: false, fetchError: error.toString() });
+                    console.log(error.message);
 
-    return (
-        <div>
-            <h2> this is body </h2>
-
-            <br />
-
-            <Block title="title 1" content="content 1" />
-            <Block2 title="title 2" content="content 2" />
-            <Block3 post={post} />
-            <Block4 title="title 4" content="content 4" show={true} />
-            {element}
-
-        </div>
-
-    );
+                }
+            )
 
 
+    }
+    render() {
 
+        const post = {
+            title: "title post ",
+            content: "content post Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus odit eos, voluptate dolores necessitatibus perferendis eius "
+        }
+        // 循环渲染
+
+        let element;
+
+        element = this.state.isLoading ?
+            <h4>the page is loading , please   waiting</h4>
+            :
+            this.state.ownposts.map(
+                (post) => (
+
+                    <Block5 key={post.id} post={post} />
+                )
+
+            )
+            ;
+        if (this.state.hasError) {
+            element = <h4>Oops , something goes wrong : {this.state.fetchError} </h4>
+
+        }
+
+        return (
+
+
+
+
+            <div className="container" >
+
+                <h2> this is body </h2>
+
+                <br />
+                {element}
+
+                {/*  <Block title="title 1" content="content 1" />
+                <Block2 title="title 2" content="content 2" />
+                <Block3 post={post} />
+                <Block4 title="title 4" content="content 4" show={true} /> */}
+
+            </div>
+
+        );
+
+
+
+    }
 }
 
 
