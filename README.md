@@ -1,3 +1,6 @@
+
+# https://www.youtube.com/watch?v=4-tq4jBD4Y8&list=PLDFBYdF-BxV1crMFDrq5ybo9ultbd27cR&index=12
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -267,4 +270,42 @@ var path = `/user/${data}`;
 * "/order/foo"  - not matched
 
 
-##　React表单介绍
+## React表单介绍 
+## React表单的 validation
+```js
+//初始化
+const initialState = {
+    email: '',
+    message: '',
+    count: 0,
+    emailError: '',
+    messageError: ''
+};
+
+//state 初始 错误信息 
+emailError: '',
+messageError: ''
+
+//表单验证方法
+validate(){}
+// 出错时 
+ emailErrorElement = <div className="alert alert-danger">{this.state.emailError}</div>
+
+```
+## Post 请求和Server交互
+
+```bash
+$ pip install flask // 安装flask框架
+$ pip install flask_cors //跨境请求
+
+```
+根目录建立 server.py
+编写 server.py
+ 
+
+运行这个服务器
+```bash
+$ python server.py
+```
+下载g postman来测试接口
+https://www.getpostman.com/downloads/
