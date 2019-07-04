@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom'  ; 
 
 
 class Block extends Component {
@@ -103,9 +104,9 @@ class Block5 extends Component {
                     <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
 
                     <p className="card-text">{this.props.post.content}</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                    <a href="#" className="card-link">Card link</a>
-                    <a href="#" className="card-link">Another link</a>
+                    <a to="#" className="btn btn-primary">Go somewhere</a>
+                    <a to="#" className="card-link">Card link</a>
+                    <a to="#" className="card-link">Another link</a>
                 </div>
             </div>
 
@@ -188,13 +189,13 @@ class Body extends Component {
 
 
 
-            <div className="container" >
+            <div   >
 
                 <h2> this is body </h2>
 
                 <br />
                 {element}
-
+                <Block title="title 1" content="content 1" />
                 {/*  <Block title="title 1" content="content 1" />
                 <Block2 title="title 2" content="content 2" />
                 <Block3 post={post} />
