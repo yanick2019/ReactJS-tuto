@@ -1,6 +1,11 @@
 
 # https://www.youtube.com/watch?v=4-tq4jBD4Y8&list=PLDFBYdF-BxV1crMFDrq5ybo9ultbd27cR&index=12
 
++ git remote add origin https://github.com/yanick2019/ReactJS-tuto.git
++ git push -u origin master
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
