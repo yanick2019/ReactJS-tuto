@@ -8,14 +8,15 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 /* 两种写法 class HeaderComponent extends Component function App() */
 function App() {
+  let pathroot = "/ReactJS-tuto/"
   return (
     <div className=" " >
       <BrowserRouter>
-        <HeaderComponent />
+        <HeaderComponent pathroot={pathroot} />
         <div className="container" >
           <Switch>
-            <Route exact path="/" component={BodyComponent} />
-            <Route path="/contact/:msg(\d*)?" component={ContactComponent} />
+            <Route exact path={pathroot} component={BodyComponent} />
+            <Route path={pathroot +"contact/:msg(\d*)?" } component={ContactComponent} />
             <Route component={Component404} />
           </Switch>
         </div>

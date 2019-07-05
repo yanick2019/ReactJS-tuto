@@ -1,5 +1,10 @@
 
- 
+
+### 部署到网址子目录里 
++ package.josn->   "homepage": "https://yanick2019.github.io/ReactJS-tuto",
++ app.js -> let pathroot = "/ReactJS-tuto/" 
+
+
 + git remote add origin https://github.com/yanick2019/ReactJS-tuto.git
 + git push -u origin master
 

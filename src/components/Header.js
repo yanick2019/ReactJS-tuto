@@ -2,10 +2,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom'  ; 
 
-function HeaderComponent() {
+function HeaderComponent({pathroot}) {
  
-
-  return (
+   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         <Link className="navbar-brand" to="#">ReactJS App</Link>
@@ -16,16 +15,16 @@ function HeaderComponent() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item ">
-              <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
+              <Link className="nav-link" to={pathroot}>Home <span className="sr-only">(current)</span></Link>
             </li>
             <li className="nav-item  ">
-              <Link className="nav-link" to="/product">Product <span className="sr-only">(current)</span></Link>
+              <Link className="nav-link" to={pathroot + "product"}>Product <span className="sr-only">(current)</span></Link>
             </li>
             <li className="nav-item  ">
-              <Link className="nav-link" to="/about">About <span className="sr-only">(current)</span></Link>
+              <Link className="nav-link" to={pathroot + "about"}>About <span className="sr-only">(current)</span></Link>
             </li>
             <li className="nav-item  ">
-              <Link className="nav-link" to="/contact">Contact <span className="sr-only">(current)</span></Link>
+              <Link className="nav-link" to=  {pathroot +  "contact" }>Contact <span className="sr-only">(current)</span></Link>
             </li>
 
           </ul>
