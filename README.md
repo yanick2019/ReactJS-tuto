@@ -8,7 +8,7 @@
 + git remote add origin https://github.com/wangphp2010/ReactJS-tuto.git
 + git push -u origin master
 
-
++ 断开链接 	git remote rm origin
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
