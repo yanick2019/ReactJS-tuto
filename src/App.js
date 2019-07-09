@@ -11,12 +11,12 @@ function App() {
   let pathroot = "/ReactJS-tuto/"
   return (
     <div className=" " >
-      <BrowserRouter>
-        <HeaderComponent pathroot={pathroot} />
+      <BrowserRouter basename="/ReactJS-tuto/">
+        <HeaderComponent   />
         <div className="container" >
           <Switch>
-            <Route exact path={pathroot} component={BodyComponent} />
-            <Route path={pathroot +"contact/:msg(\d*)?" } component={ContactComponent} />
+            <Route exact path="/" component={BodyComponent} />
+            <Route path="/contact/:msg(\d*)?"  component={ContactComponent} />
             <Route component={Component404} />
           </Switch>
         </div>

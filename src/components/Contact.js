@@ -11,8 +11,8 @@ class ContactComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'sdfsdf@sdfsdf.fr',
-            message: 'Type your message',
+            email: '',
+            message: '',
             count: 0,
             emailError: '',
             messageError: ''
@@ -68,13 +68,13 @@ class ContactComponent extends React.Component {
                         console.log('Success');
                         console.log(response )
                     }else{
-                        alert('Failed');
+                        alert('Failed http://127.0.0.1:5000/message not found');
                         alert(response)
                     }
                 }
             ).catch(
                 error=> {
-                    alert('Failed');
+                    alert(' catch Failed http://127.0.0.1:5000/message not found' );
                     alert(error)
                 }
 
@@ -142,7 +142,7 @@ class ContactComponent extends React.Component {
             <div>
                 <h1>This is page contact </h1>
                 <p> {elementParamsMsg} </p>
-                <p> 输入 {this.state.count} 次 </p>
+                <p> Type {this.state.count} time </p>
                 <p> {this.state.email} </p>
                 <p> {this.state.message} </p>
 

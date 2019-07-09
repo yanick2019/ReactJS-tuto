@@ -136,21 +136,46 @@ class Body extends Component {
     //相当于vuejs 里的mounted 方法
     componentDidMount() {
         this.setState({ isLoading: true });
-        fetch('http://localhost:3001/posts').then(
-            // 简写response=>response.ok
-            // 非简写response=>{ return response.json() }
+        let url = 'http://localhost:3001/posts' ;
+        url = "https://underpowered-barrel.000webhostapp.com/api.php?apikey=getApiKey" ;
+        url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=9ba1b6b28a764b8c92958d2399239a40';
 
-            response => {
-                if (response.ok) { return response.json(); } else { throw new Error("this is error throwed " + response.statusText) }
+        const params = {
+            method:'POST',
+           /*  headers:{
+               'Accept':'application/json',
+               'Content-Type': 'application/json'
+           }, */
+           cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, same-origin, *omit
+            headers: {
+            'user-agent': 'Mozilla/4.0 MDN Example',
+            'content-type': 'application/json'
+            },
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // *client, no-referrer
+             
+            
+       };
 
-            }
-        )
+
+        fetch(url , params ).then(
+                // 简写response=>response.ok
+                // 非简写response=>{ return response.json() }
+
+                response => {
+                    if (response.ok) { console.log(response); return response.json(); } else { throw new Error("this is error throwed " + response.statusText) }
+
+                }
+            )
             .then(
-                data => this.setState({ ownposts: data, isLoading: false })
+                data => this.setState({ ownposts: data, isLoading: false }) //这里的data= return response.json(); 来的数据
             )
             .catch(
                 error => {
-                    this.setState({ hasError: true, isLoading: false, fetchError: error.toString() });
+                    this.setState({ hasError: true, isLoading: false, fetchError: error.toString()+ " " + url   });
                     console.log(error.message);
 
                 }
@@ -180,9 +205,9 @@ class Body extends Component {
             )
             ;
         if (this.state.hasError) {
-            element = <h4>Oops , something goes wrong : {this.state.fetchError} </h4>
+            element  = <h4>Oops , something goes wrong : {this.state.fetchError} </h4>
 
-        }
+        }  
 
         return (
 

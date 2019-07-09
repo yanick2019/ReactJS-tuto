@@ -1,11 +1,11 @@
 
 
 ### 部署到网址子目录里 
-+ package.josn->   "homepage": "https://yanick2019.github.io/ReactJS-tuto",
++ package.josn->   "homepage": "https://wangphp2010.github.io/ReactJS-tuto",
 + app.js -> let pathroot = "/ReactJS-tuto/" 
 
 
-+ git remote add origin https://github.com/yanick2019/ReactJS-tuto.git
++ git remote add origin https://github.com/wangphp2010/ReactJS-tuto.git
 + git push -u origin master
 
 
@@ -101,6 +101,22 @@ $ npm start
     + <HeaderComponent />
 
 ## Props参数传递
+```js
+    //传入 
+    <Block post={post} />
+    //接受
+    //方法1
+    function Block({ post }) {...}
+    //方法2
+    class Body extends Component {
+        constructor(props) {
+            super(props);/// 必须写 
+        }
+        this.props.post      
+            ...
+    }
+    
+```
 
 ## State 和状态的修改
 
@@ -245,11 +261,59 @@ $ npm install react-router-dom
      </div>
      ````
 + Header.js import { NavLink , Link } from 'react-router-dom'  ; 替换 <a href=""></a> 为 <NavLink to="path"></NavLink>   / <Link to="path"></Link> 
-### 问题
-        路由匹配是从上个路由往下个路由匹配 如果匹配了第一个就不匹配第二个了 , 如: 主页 路径是 '/' 匹配了有其他路由路径 所以要写上 exact 让它 精确匹配  <Route exact path="/" component={BodyComponent} />
+### 路由问题
         
-        <Route  path="/" component={BodyComponent} />
-        <Route path="/contact" component={ContactComponent} />
+路由匹配是从上个路由往下个路由匹配 如果匹配了第一个就不匹配第二个了 , 如: 主页 路径是 '/' 匹配了有其他路由路径 所以要写上 exact 让它 精确匹配  <Route exact path="/" component={BodyComponent} />
+```
+<Route  path="/" component={BodyComponent} />
+<Route path="/contact" component={ContactComponent} />
+```
+        
+        
+如何将React应用程序部署到服务器的子目录/子路由
++ 1 在<Router/>组件上设置basename属性，告诉React Router将从指定子目录提供应用程序，示例：
+    ```
+    <Router basename={'/reactapp'}>
+        <Route exact path="/" component={Home}/>
+            <Route path="/news" component={News}/>
+        <Route path="/about" component={About}/>
+        {/* … */}
+        <Route component={NoMatch}/>
+    </Router>
+    ```
++ 2 设置应用的homepage属性
+    在package.json中设置homepage属性，指定主页路径，示例：
+    ```
+        {
+        "name": "my-react-app",
+        "version": "0.1.0",
+        "homepage": "http://192.168.100.36:3000/reactapp",
+        "private": true,
+        //...这里省略package.json的其它代码...
+        }
+    ```
++ 3 在路由中指定全路径
+    在步骤2中设置的homepage值可以通过获取环境变量的方式process.env.PUBLIC_URL取得。我们就可以在 <Route/>中指定全路径了，示例：
+    ```
+    <Router basename={'/reactapp'}>
+      <Route path={`${process.env.PUBLIC_URL}/`} component={Home} />
+      <Route path={`${process.env.PUBLIC_URL}/news`} component={News} />
+      <Route path={`${process.env.PUBLIC_URL}/about`} component={About} />
+       {/* … */}
+      <Route component={NoMatch}/>
+    </Router>
+    ```
++ 4.链接修改为全路径方式
+    整个应用会有很多<Link/>组件，我将这些Link也都改成全路径方式，示例：
+    ```
+    <Link to={`${process.env.PUBLIC_URL}/news`}>新闻</Link>
+    <Link to={`${process.env.PUBLIC_URL}/about`}>关于我们</Link>
+    ```
+    通过以上的修改，整个应用就可以部署到你想的任何子目录了。
+
+
+
+
 ### 路由 传值/取值 
 
 var data = {id:3,name:sam,age:36};
