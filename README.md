@@ -1,4 +1,4 @@
-
+demo https://wangphp2010.github.io/ReactJS-tuto
 
 ### 部署到网址子目录里 
 + package.josn->   "homepage": "https://wangphp2010.github.io/ReactJS-tuto",
@@ -382,3 +382,65 @@ $ python server.py
 ```
 下载g postman来测试接口
 https://www.getpostman.com/downloads/
+
+
+
+
+
+教程 https://juejin.im/post/5b755537e51d45661d27cdc3
+
+## 使用 Redux
+
+```
+$ npm install --save redux
+```
+创建 
++ src/Reducer.js
++ src/Action.js
++ src/Store.js 
++ src/ActionType.js
++ src/components/Redux_totu.js
+
+## 使用 react-redux
+
+```
+$ npm install --save react-redux
+```
+
+修改 App.js 
+
+```
+ 
++import store from "./Store";
++import { Provider } from 'react-redux'
+
+ 
+  return (
++  <Provider store={store}>
+    <BrowserRouter basename="/ReactJS-tuto/">
+        全部内容
+        ...
+    </BrowserRouter>
++  </Provider>,
+ 
+
+
+  );
+ 
+
+```
+
+修改Redux_totu.js
+
+```
+handleIncrement = (e) => {
+    +this.props.dispatch(Action.increment());
+...
++ <h3 className="text-center mt-5">{this.props.count}</h3>
+...
++const mapStateToProps = state => ({
++      count: state
++    });
+    
++export default connect(mapStateToProps)(App);
+```

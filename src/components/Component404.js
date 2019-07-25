@@ -10,6 +10,7 @@ render(){
      <div>
           <h1>This is 404 page </h1>
           <p>we do not have router named: {window.location.pathname }</p>
+          <p>we do not have router named: {this.props.location.pathname }</p>
      </div>
 
   );

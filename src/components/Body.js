@@ -263,7 +263,7 @@ urlToImage: "https://media4.s-nbcnews.com/j/newscms/2019_01/2705191/nbc-social-d
 class Block5 extends Component {
     render() {
         return (
-
+            
             <div className="card mt-2" style={{ width: '50rem' }} >
                  <div className="card-body">
                     <h5 className="card-title">Card title   {this.props.post.title} </h5>
@@ -280,7 +280,7 @@ class Block5 extends Component {
                  </div>
             </div>
 
-
+ 
 
 
         )
@@ -342,15 +342,17 @@ class Body extends Component {
         // 循环渲染
 
         let element;
-
- 
+        let page = this.props.match.params.page?this.props.match.params.page:1 ; 
+        let pagesize = 3 ; 
+        let pagenum =  Math.ceil(this.state.articles.length / pagesize) ;  
+        if(page>pagenum) page = pagenum ;
          
         if (this.state.articles.length) {
             element = this.state.isLoading ?
                 <h4>the page is loading , please   waiting</h4>
                 : this.state.articles.map( function(article, key) {
-                            
-                    return  <Block5 key={key} post={article} />  ;
+                    
+                    if( key < pagesize ) return (    <Block5 key={key} post={article} />  ) ;
                    
                 })
         }
@@ -366,12 +368,12 @@ class Body extends Component {
 
 
 
-            <div   >
+            <div>
 
-                <h2> this is body </h2>
+                <h1> this is body of Home page  </h1>
 
                 <br />
-                {element}
+                 {element}  
                 {/* <Block title="title 1" content="content 1" />
                 <Block title="title 1" content="content 1" />
                 <Block2 title="title 2" content="content 2" />
