@@ -444,3 +444,16 @@ handleIncrement = (e) => {
     
 +export default connect(mapStateToProps)(App);
 ```
+
+
+
+## 问题
+
+代码中变量取值问题
+ 
+用this.setState({message:"like"}) 后马上接代码this.stete.message, this.stete.message的值不会马上改变,而是在下一次渲染才会起作用.
+```
+this.stete.message // 可以修改 但是不对渲染后的结果起作用  
+this.setState({message:"like"}) ## 只对渲染后的结果起作用 不对this.stete.message起作用
+this.stete.message
+```

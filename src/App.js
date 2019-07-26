@@ -38,7 +38,7 @@ function App(props) {
                 <TransitionGroup>
                   <CSSTransition
                     key={location.pathname}
-                    classNames="fade"
+                    classNames="slide"
                     timeout={300}
                   >
                     <Switch location={location}>

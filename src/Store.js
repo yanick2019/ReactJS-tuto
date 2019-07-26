@@ -28,6 +28,7 @@ const store = createStore(Reducer) */
 
 // 多个值 
 function count(state = 0, action) {
+  
     switch (action.type) {
         case ActionTypes.INCREMENT:
             return state + 1;
