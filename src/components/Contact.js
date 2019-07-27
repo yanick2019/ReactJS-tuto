@@ -13,8 +13,8 @@ class ContactComponent extends React.Component {
             email: '',
             message: '',
             newmsg: {
-                email: '',
-                message: '',
+                email: 'test@test',
+                message: 'testtesttesttesttest',
             },
             count: 0,
             emailError: '',
@@ -63,11 +63,7 @@ class ContactComponent extends React.Component {
     handlSubmit = (e) => {
 
         e.preventDefault();
-
-
         if (this.validate()) {
-
-
             let maxid = -1;
 
             if (this.state.messages.length > 0) {
@@ -76,20 +72,9 @@ class ContactComponent extends React.Component {
                 });
             }
             maxid = maxid + 1;
-
-
-
-
-
-
             this.state.messages.push({ email: this.state.newmsg.email + maxid, message: this.state.newmsg.message, date: new Date().toLocaleString(), id: maxid })
-
-
-
             this.insertIntoLocalStore(this.state.messages)
             this.clear(e);
-
-
 
         }
         else {
@@ -149,6 +134,8 @@ class ContactComponent extends React.Component {
 
 
     }
+
+
     editMsg(message) {
 
 
@@ -184,8 +171,7 @@ class ContactComponent extends React.Component {
 
     clear = (e) => {
         e.preventDefault();
-        console.clear()
-        this.initialState();
+        //  this.initialState();
 
         /*   this.setState({
   
@@ -198,33 +184,99 @@ class ContactComponent extends React.Component {
     editDone = (e) => {
         this.clear(e);
     }
+    handleMessages(messagestemp, i) {
+        messagestemp.reverse().splice(i, 1); //虽然messages 是常量 ,但是可以修改它的内存
+
+        let removeSelected;
+        let that = this.state.removeSelected;
+
+        let idslt;
+        messagestemp.map(function (s, ii) {
+            if (i == ii) {
+                idslt = s.id;  // 获取要删除那个message 的message.id
+            }
+        })
+
+
+
+        removeSelected = that.filter(function (val) {
+            if (val != idslt) return val; //把removeSelected中不是要删除那个message 的message.id  全部返回
+
+        })
+
+
+
+
+
+        console.log(removeSelected)
+        messagestemp.reverse()
+        /*    this.setState({ messages: messagestemp, removeSelected: removeSelected });
+           this.insertIntoLocalStore(messagestemp) */
+
+    }
     removeMsg(i, e) {
 
         const messagestemp = this.state.messages.slice();// 这样写 两个变量就不会指向同意内存
-        messagestemp.reverse().splice(i, 1); //虽然messages 是常量 ,但是可以修改它的内存
-        messagestemp.reverse()
+        // messagestemp.reverse().splice(i, 1); //虽然messages 是常量 ,但是可以修改它的内存
 
-
-
-
-        this.setState({ messages: messagestemp });
-        this.insertIntoLocalStore(messagestemp)
-
-
-
-
+        this.handleMessages(messagestemp, i);
 
     }
     removeAll() {
         let messagestemp = [];
-        this.setState({ messages: messagestemp });
-        this.insertIntoLocalStore(messagestemp)
+        if (window.confirm("Are you sure to remove them?")) {
+            this.setState({ messages: messagestemp });
+            this.insertIntoLocalStore(messagestemp)
+        }
+
     }
 
     removeSelected() {
 
 
+        let that = this.state.removeSelected;
+        // filtre 不会加入是false的元素而map 会把false当成一个元素加入到数组
+        let newmsgs = this.state.messages.filter(function (s) {
+            if (that.indexOf(s.id.toString()) >= 0) {
+                return false;
+            } else {
+                return s;
+            }
+        });
+
+
+
+
+
+
+
+        if (window.confirm("Are you sure to remove them?")) {
+            this.setState({ messages: newmsgs, removeSelected: [] });
+            this.insertIntoLocalStore(newmsgs)
+        }
+
+
+
     }
+
+    checkedBox = (e) => {
+        if (e.target.checked) {
+            this.state.removeSelected.push(e.target.value)
+        }
+        else {
+            this.state.removeSelected = this.state.removeSelected.filter(function (s) {
+                if (s == e.target.value) {
+                    return false;
+                } else {
+                    return s;
+                }
+            });
+
+        }
+        this.setState({ removeSelected: this.state.removeSelected })
+
+    }
+
     insertIntoLocalStore(messages) {
 
         localStorage.setItem("messages", JSON.stringify(messages))
@@ -249,8 +301,20 @@ class ContactComponent extends React.Component {
         }
 
 
+
+
+
+
         let elMes;
         let messages = [];
+        let haveMsg = true;
+
+
+        let removeSelectedBool = true;
+        if (this.state.removeSelected.length > 0)
+            removeSelectedBool = false;
+        else
+            removeSelectedBool = true;
 
 
 
@@ -259,44 +323,61 @@ class ContactComponent extends React.Component {
         messages = messages.reverse();
 
         if (messages.length > 0) {
+            haveMsg = false;
 
-            elMes = messages.map((message, i) =>
-                (
+
+            elMes = messages.map((message, i) => {
+                var className = "alert-message alert-message-notice ";
+                let isCheck = false;
+                this.state.removeSelected.map(function (val) {
+                    if (message.id == val) { className += " alert-message-border border-info  "; isCheck = true; }
+
+
+                });
+
+                return (
 
 
                     <div key={message.id} className="col-md-12  " >
+                        <div className={className} >
+                            <div className="float-right" >
+                                <p className="checkbox">
+                                    <label>
+                                        <input type="checkbox" className=" form-check-input mr-2 " onChange={this.checkedBox} value={message.id} checked={isCheck} />
+                                        <span className="cr"><i className=" cr-icon  glyphicon glyphicon-ok"></i></span>
 
-                        <div className="alert-message alert-message-notice">
-                            <p className="float-right">
-                            <input type="checkbox" className=" form-check-input mr-2 "  />
-                            <button className="btn btn-info mr-2  " onClick={() => this.editMsg(message)}  >edit</button>
+                                    </label>
+                                </p>
+                                <button className="btn btn-info mr-2  " onClick={() => this.editMsg(message)}  >edit</button>
                                 <button className="btn btn-danger mr-2   " onClick={this.removeMsg.bind(this, i)} >remove</button>
-                                
-                            </p>
-                            <h5> {message.email} {i} </h5>
-                            <div className="   ml-4  "> {message.message}   </div>
-                            <p className="   ml-2 ">{message.date}</p>
-                        </div>
+                            </div>
 
-                    </div>
+
+                            <h4 > <b>#{message.id}</b>  <span >{message.email}</span>  </h4>
+
+
+
+                            <div className="ml-4"> {message.message}   </div>
+                            <p className="ml-2">{message.date}</p>
+                        </div>  </div>
 
 
 
                 )
+            }
 
             )
-        } else elMes = (
+        } else {
+            haveMsg = true;
+            elMes = (
 
-            <div className="col-md-12  border border-success ">
-                <div className="alert-message alert-message-notice">
-                    <h5> We don't have any message yet </h5>
+                <div className="col-md-12  border border-success ">
+                    <div className="alert-message alert-message-notice">
+                        <h5> We don't have any message yet </h5>
+                    </div>
                 </div>
-
-
-
-            </div>
-        )
-
+            )
+        }
 
 
 
@@ -342,9 +423,9 @@ class ContactComponent extends React.Component {
                         transitionAppearTimeout={500}
                         transitionEnterTimeout={500}
                         transitionLeaveTimeout={300} className='sspp'>
-                        <button className="btn btn-danger mt-4 mb-4 mr-2  " onClick={this.removeAll.bind(this)} >removeAll</button>
-                        <button className="btn btn-danger mt-4 mb-4   " onClick={this.removeSelected.bind(this)} >removeSelected</button>
-
+                        <button className="btn btn-danger mt-4 mb-4 mr-2  " onClick={this.removeAll.bind(this)} disabled={haveMsg} >removeAll</button>
+                        <button className="btn btn-danger mt-4 mb-4   " onClick={this.removeSelected.bind(this)} disabled={removeSelectedBool}>removeSelected </button>
+                        <p>Message selected: {this.state.removeSelected.length}</p>
                         {elMes}
                     </ReactCSSTransitionGroup>
 
@@ -359,20 +440,20 @@ class ContactComponent extends React.Component {
 }
 
 
-/* function ContactComponent({ match }) {
+/* function ContactComponent({match}) {
 
-    let elementParamsMsg =
-        match.params.msg ? " This is  params of route: " + match.params.msg : " We have no params of route ";
-
-
-    return (
+                            let elementParamsMsg =
+                            match.params.msg ? " This is  params of route: " + match.params.msg : " We have no params of route ";
+                    
+                    
+                        return (
         <div>
-            <h1>This is page contact </h1>
-            <p> { match.params.msg } </p>
- 
-        </div>
-    );
-} */
+                            <h1>This is page contact </h1>
+                            <p> {match.params.msg} </p>
+
+                        </div>
+                        );
+                    } */
 
 // export default ContactComponent;
 

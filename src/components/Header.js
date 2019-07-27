@@ -21,9 +21,7 @@ function HeaderComponent() {
               <li className="nav-item  ">
                 <Link className="nav-link" to="Messageb">Message Board<span className="sr-only">(current)</span></Link>
               </li>
-              <li className="nav-item  ">
-                <Link className="nav-link" to="todo">To-do<span className="sr-only">(current)</span></Link>
-              </li>
+
               <li className="nav-item  ">
                 <Link className="nav-link" to="about">About <span className="sr-only">(current)</span></Link>
               </li>
@@ -41,7 +39,7 @@ function HeaderComponent() {
           </div>
         </div>
       </nav>
-      
+
     </div>
   );
 

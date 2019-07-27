@@ -4,8 +4,7 @@ import FootComponent from './components/Foot';
 import BodyComponent from './components/Body';
 import ContactComponent from './components/Contact';
 
-import Todo from './components/To-do';
-import About from './components/About';
+ import About from './components/About';
 import Messageb from './components/Messageb';
 
 import Rt from './components/Redux_totu';
@@ -15,6 +14,15 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./css/style.css";
 import store from "./Store";
 import { Provider } from 'react-redux'
+
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* import 'jquery/dist/jquery.min';  
+ import 'popper.js/dist/popper.min';
+ import 'bootstrap/dist/js/bootstrap.min'; 
+window.$ = window.jQuery = require('jquery');// 不加会报错 Bootstrap's JavaScript requires jQuery
+ */
 
 /* 两种写法 class HeaderComponent extends Component function App() */
 
@@ -45,8 +53,7 @@ function App(props) {
 
                       <Route exact path="/:page(\d+)?" component={BodyComponent} />
                       <Route path="/contact/:msg(\d+)?" component={ContactComponent} />
-                      <Route path="/todo" component={Todo} />
-                      <Route path="/Messageb" component={Messageb} />
+                       <Route path="/Messageb" component={Messageb} />
 
                       <Route path="/about" component={About} />
                       <Route path="/rt" component={Rt} />
