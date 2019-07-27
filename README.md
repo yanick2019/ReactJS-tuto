@@ -2,7 +2,7 @@ demo https://wangphp2010.github.io/ReactJS-tuto
 
 ### 部署到网址子目录里 
 + package.josn->   "homepage": "https://wangphp2010.github.io/ReactJS-tuto",
-+ app.js ->  <BrowserRouter basename="/ReactJS-tuto/"> 
++ app.js->  <BrowserRouter basename="/ReactJS-tuto/"> 
 
 
 + git remote add origin https://github.com/wangphp2010/ReactJS-tuto.git
