@@ -1,15 +1,18 @@
 {
   "files": {
-    "main.js": "/ReactJS-tuto/static/js/main.21c88c25.chunk.js",
-    "main.js.map": "/ReactJS-tuto/static/js/main.21c88c25.chunk.js.map",
+    "main.css": "/ReactJS-tuto/static/css/main.9b768e90.chunk.css",
+    "main.js": "/ReactJS-tuto/static/js/main.c6cf4a5f.chunk.js",
+    "main.js.map": "/ReactJS-tuto/static/js/main.c6cf4a5f.chunk.js.map",
     "runtime~main.js": "/ReactJS-tuto/static/js/runtime~main.8ae1827e.js",
     "runtime~main.js.map": "/ReactJS-tuto/static/js/runtime~main.8ae1827e.js.map",
-    "static/css/2.0624914a.chunk.css": "/ReactJS-tuto/static/css/2.0624914a.chunk.css",
-    "static/js/2.52176dee.chunk.js": "/ReactJS-tuto/static/js/2.52176dee.chunk.js",
-    "static/js/2.52176dee.chunk.js.map": "/ReactJS-tuto/static/js/2.52176dee.chunk.js.map",
+    "static/css/2.17eab07b.chunk.css": "/ReactJS-tuto/static/css/2.17eab07b.chunk.css",
+    "static/js/2.b3bf3cb3.chunk.js": "/ReactJS-tuto/static/js/2.b3bf3cb3.chunk.js",
+    "static/js/2.b3bf3cb3.chunk.js.map": "/ReactJS-tuto/static/js/2.b3bf3cb3.chunk.js.map",
     "index.html": "/ReactJS-tuto/index.html",
-    "precache-manifest.61eee95b053f4d903294c888a778794a.js": "/ReactJS-tuto/precache-manifest.61eee95b053f4d903294c888a778794a.js",
+    "precache-manifest.2703b087e03b2c51262cede9f8c62873.js": "/ReactJS-tuto/precache-manifest.2703b087e03b2c51262cede9f8c62873.js",
     "service-worker.js": "/ReactJS-tuto/service-worker.js",
-    "static/css/2.0624914a.chunk.css.map": "/ReactJS-tuto/static/css/2.0624914a.chunk.css.map"
+    "static/css/2.17eab07b.chunk.css.map": "/ReactJS-tuto/static/css/2.17eab07b.chunk.css.map",
+    "static/css/main.9b768e90.chunk.css.map": "/ReactJS-tuto/static/css/main.9b768e90.chunk.css.map",
+    "static/media/bootstrap.min.css": "/ReactJS-tuto/static/media/glyphicons-halflings-regular.fa277232.woff"
   }
 }

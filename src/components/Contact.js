@@ -171,7 +171,7 @@ class ContactComponent extends React.Component {
 
     clear = (e) => {
         e.preventDefault();
-        //  this.initialState();
+          this.initialState();
 
         /*   this.setState({
   
@@ -185,8 +185,8 @@ class ContactComponent extends React.Component {
         this.clear(e);
     }
     handleMessages(messagestemp, i) {
-        messagestemp.reverse().splice(i, 1); //虽然messages 是常量 ,但是可以修改它的内存
-
+        messagestemp.reverse() ; //虽然messages 是常量 ,但是可以修改它的内存
+        
         let removeSelected;
         let that = this.state.removeSelected;
 
@@ -197,6 +197,7 @@ class ContactComponent extends React.Component {
             }
         })
 
+        
 
 
         removeSelected = that.filter(function (val) {
@@ -204,14 +205,14 @@ class ContactComponent extends React.Component {
 
         })
 
-
-
-
-
-        console.log(removeSelected)
+    //  console.log( idslt  ,  removeSelected)
+        messagestemp.splice(i, 1); //虽然messages 是常量 ,但是可以修改它的内存
         messagestemp.reverse()
-        /*    this.setState({ messages: messagestemp, removeSelected: removeSelected });
-           this.insertIntoLocalStore(messagestemp) */
+        
+      
+        
+           this.setState({ messages: messagestemp, removeSelected: removeSelected });
+           this.insertIntoLocalStore(messagestemp)  
 
     }
     removeMsg(i, e) {
@@ -345,7 +346,7 @@ class ContactComponent extends React.Component {
                                     <label>
                                         <input type="checkbox" className=" form-check-input mr-2 " onChange={this.checkedBox} value={message.id} checked={isCheck} />
                                         <span className="cr"><i className=" cr-icon  glyphicon glyphicon-ok"></i></span>
-
+                                    Select
                                     </label>
                                 </p>
                                 <button className="btn btn-info mr-2  " onClick={() => this.editMsg(message)}  >edit</button>

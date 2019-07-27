@@ -120,8 +120,7 @@ class Block6 extends Component {
         url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=9ba1b6b28a764b8c92958d2399239a40';
 
         const params = {
-            method: 'POST',
-            /*  headers:{
+             /*  headers:{
                 'Accept':'application/json',
                 'Content-Type': 'application/json'
             }, */

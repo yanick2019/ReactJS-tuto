@@ -4,7 +4,7 @@ import FootComponent from './components/Foot';
 import BodyComponent from './components/Body';
 import ContactComponent from './components/Contact';
 
- import About from './components/About';
+import About from './components/About';
 import Messageb from './components/Messageb';
 
 import Rt from './components/Redux_totu';
@@ -39,10 +39,10 @@ function App(props) {
           render={({ location }) => (
             <div   >{/* 一定要把全部东西包在 div 或其他一个标签里 */}
 
+
               <HeaderComponent />
-             
-              <div className="container" >
-            
+              <div className="container  " >
+
                 <TransitionGroup>
                   <CSSTransition
                     key={location.pathname}
@@ -53,7 +53,7 @@ function App(props) {
 
                       <Route exact path="/:page(\d+)?" component={BodyComponent} />
                       <Route path="/contact/:msg(\d+)?" component={ContactComponent} />
-                       <Route path="/Messageb" component={Messageb} />
+                      <Route path="/Messageb" component={Messageb} />
 
                       <Route path="/about" component={About} />
                       <Route path="/rt" component={Rt} />
