@@ -377,7 +377,7 @@ class ContactComponent extends React.Component {
                             </div>
 
                             <div>
-                                <p className="checkbox">
+                                <p className="checkbox   " style={{width:'150px'}} >
                                     <label>
                                         <b classsName=" mr-4 ">#{message.id}</b> &nbsp;
                                         <input type="checkbox" className=" form-check-input mr-2 " onChange={this.checkedBox} value={message.id} checked={isCheck} />
@@ -385,7 +385,7 @@ class ContactComponent extends React.Component {
                                         Select
                                     </label>
                                 </p>
-                                <h4 >  {message.email}   </h4>
+                                <h4  >  {message.email}   </h4>
 
                                 <div className="ml-4"> {message.message}   </div>
                                 <p className="ml-2">{message.date}</p>
