@@ -319,6 +319,10 @@ class Body extends Component {
 
                     return res.data;
                 }
+                else
+                {
+                    throw new Error("this is error throwed " + res.statusText)
+                }
 
 
 
