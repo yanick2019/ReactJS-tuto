@@ -15,6 +15,7 @@ class ContactComponent extends React.Component {
             newmsg: {
                 email: 'test@test',
                 message: 'testtesttesttesttest',
+                id: 0,
             },
             count: 0,
             emailError: '',
@@ -136,20 +137,7 @@ class ContactComponent extends React.Component {
     }
 
 
-    editMsg(message) {
 
-
-
-        //   window.scrollTo( document.getElementById('myform').scrollWidth , document.getElementById('myform').offsetParent.offsetTop   ) ;
-        scrollToElement("#myform", {
-            offset: 0,
-            //  ease: 'out-bounce',
-            duration: 500
-        });
-        this.setState({ newmsg: message }); // 变量都用对象类型, 这样做,  newmsg 与 messsages中传进来的message 指向了同一个内存地址 ,于是修改newmsg等于修改了messsages中传进来的message
-
-
-    }
     initialState() {
 
         this.setState({
@@ -171,7 +159,7 @@ class ContactComponent extends React.Component {
 
     clear = (e) => {
         e.preventDefault();
-          this.initialState();
+        this.initialState();
 
         /*   this.setState({
   
@@ -181,12 +169,43 @@ class ContactComponent extends React.Component {
               },
           }); */
     }
+    editMsg(message) {
+        //   window.scrollTo( document.getElementById('myform').scrollWidth , document.getElementById('myform').offsetParent.offsetTop   ) ;
+        scrollToElement("#myform", {
+            offset: 0,
+            //  ease: 'out-bounce',
+            duration: 500
+        });
+
+        //this.setState({ newmsg: message }); // 变量都用对象类型, 这样做,  newmsg 与 messsages中传进来的message 指向了同一个内存地址 ,于是修改newmsg等于修改了messsages中传进来的message
+        this.setState({ newmsg: { ...message } });
+
+
+
+    }
     editDone = (e) => {
-        this.clear(e);
+        e.preventDefault();
+
+
+        if (this.validate()) {
+            let newmsg = this.state.newmsg
+            let that = this;
+            let newMessages = that.state.messages.map(function (message) {
+
+                if (newmsg.id == message.id) {
+                    return newmsg;
+                }
+                else return message;
+            })
+            this.insertIntoLocalStore(newMessages);
+            this.setState({ messages: newMessages })
+            this.clear(e);
+        }
+
     }
     handleMessages(messagestemp, i) {
-        messagestemp.reverse() ; //虽然messages 是常量 ,但是可以修改它的内存
-        
+        messagestemp.reverse(); //虽然messages 是常量 ,但是可以修改它的内存
+
         let removeSelected;
         let that = this.state.removeSelected;
 
@@ -197,7 +216,7 @@ class ContactComponent extends React.Component {
             }
         })
 
-        
+
 
 
         removeSelected = that.filter(function (val) {
@@ -205,14 +224,14 @@ class ContactComponent extends React.Component {
 
         })
 
-    //  console.log( idslt  ,  removeSelected)
+        //  console.log( idslt  ,  removeSelected)
         messagestemp.splice(i, 1); //虽然messages 是常量 ,但是可以修改它的内存
         messagestemp.reverse()
-        
-      
-        
-           this.setState({ messages: messagestemp, removeSelected: removeSelected });
-           this.insertIntoLocalStore(messagestemp)  
+
+
+
+        this.setState({ messages: messagestemp, removeSelected: removeSelected });
+        this.insertIntoLocalStore(messagestemp)
 
     }
     removeMsg(i, e) {
@@ -259,7 +278,17 @@ class ContactComponent extends React.Component {
 
 
     }
+    slecteAll = (e) => {
+        let removeSelected = [];
+        if (e.target.checked) {
+            removeSelected = this.state.messages.map(function (message) {
 
+                return message.id;
+            })
+            this.state.removeSelected.push(e.target.value)
+        }
+        this.setState({ removeSelected: removeSelected })
+    }
     checkedBox = (e) => {
         if (e.target.checked) {
             this.state.removeSelected.push(e.target.value)
@@ -341,26 +370,30 @@ class ContactComponent extends React.Component {
 
                     <div key={message.id} className="col-md-12  " >
                         <div className={className} >
-                            <div className="float-right" >
-                                <p className="checkbox">
-                                    <label>
-                                        <input type="checkbox" className=" form-check-input mr-2 " onChange={this.checkedBox} value={message.id} checked={isCheck} />
-                                        <span className="cr"><i className=" cr-icon  glyphicon glyphicon-ok"></i></span>
-                                    Select
-                                    </label>
-                                </p>
+                            <div className="float-right">
+
                                 <button className="btn btn-info mr-2  " onClick={() => this.editMsg(message)}  >edit</button>
                                 <button className="btn btn-danger mr-2   " onClick={this.removeMsg.bind(this, i)} >remove</button>
                             </div>
 
+                            <div>
+                                <p className="checkbox">
+                                    <label>
+                                        <b classsName=" mr-4 ">#{message.id}</b> &nbsp;
+                                        <input type="checkbox" className=" form-check-input mr-2 " onChange={this.checkedBox} value={message.id} checked={isCheck} />
+                                        <span className="cr"><i className=" cr-icon  glyphicon glyphicon-ok"></i></span>
+                                        Select
+                                    </label>
+                                </p>
+                                <h4 >  {message.email}   </h4>
 
-                            <h4 > <b>#{message.id}</b>  <span >{message.email}</span>  </h4>
+                                <div className="ml-4"> {message.message}   </div>
+                                <p className="ml-2">{message.date}</p>
 
+                            </div>
 
-
-                            <div className="ml-4"> {message.message}   </div>
-                            <p className="ml-2">{message.date}</p>
-                        </div>  </div>
+                        </div>
+                    </div>
 
 
 
@@ -426,7 +459,15 @@ class ContactComponent extends React.Component {
                         transitionLeaveTimeout={300} className='sspp'>
                         <button className="btn btn-danger mt-4 mb-4 mr-2  " onClick={this.removeAll.bind(this)} disabled={haveMsg} >removeAll</button>
                         <button className="btn btn-danger mt-4 mb-4   " onClick={this.removeSelected.bind(this)} disabled={removeSelectedBool}>removeSelected </button>
-                        <p>Message selected: {this.state.removeSelected.length}</p>
+                        <p>Message selected: {this.state.removeSelected.map((val)=>val+"  ")}</p>
+                        <p className="checkbox" >
+                            <label>
+                                <input type="checkbox" className=" form-check-input mr-2 " onChange={this.slecteAll} />
+                                <span className="cr"><i className=" cr-icon  glyphicon glyphicon-ok"></i></span>
+                                Slecte all
+
+                          </label>
+                        </p>
                         {elMes}
                     </ReactCSSTransitionGroup>
 
