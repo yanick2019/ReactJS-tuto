@@ -2,11 +2,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function HeaderComponent() {
+function HeaderComponent(props) {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
           <Link className="navbar-brand" to="#"><b>ReactJS App</b></Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,6 +19,9 @@ function HeaderComponent() {
                 <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
               </li>
               <li className="nav-item  ">
+                <Link className="nav-link" to="contact" >Contact <span className="sr-only">(current)</span></Link>
+              </li>
+              <li className="nav-item  ">
                 <Link className="nav-link" to="Messageb">Message Board<span className="sr-only">(current)</span></Link>
               </li>
 
@@ -28,9 +31,7 @@ function HeaderComponent() {
               <li className="nav-item  ">
                 <Link className="nav-link" to="rt">Redux_totu <span className="sr-only">(current)</span></Link>
               </li>
-              <li className="nav-item  ">
-                <Link className="nav-link" to="contact" >Contact <span className="sr-only">(current)</span></Link>
-              </li>
+             
 
             </ul>
 

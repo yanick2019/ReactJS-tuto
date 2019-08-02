@@ -379,7 +379,7 @@ class ContactComponent extends React.Component {
                             <div>
                                 <p className="checkbox   " style={{width:'150px'}} >
                                     <label>
-                                        <b classsName=" mr-4 ">#{message.id}</b> &nbsp;
+                                        <b classsname=" mr-4 ">#{message.id}</b> &nbsp;
                                         <input type="checkbox" className=" form-check-input mr-2 " onChange={this.checkedBox} value={message.id} checked={isCheck} />
                                         <span className="cr"><i className=" cr-icon  glyphicon glyphicon-ok"></i></span>
                                         Select

@@ -56,6 +56,7 @@ class App extends Component {
 
 
     render() {
+         console.log(this.props.posf )
 
         // src/Action.js里面的方法:  increment,decrement  是通过export default connect(mapStateToProps,Action)(App); 传入的  
         const { increment, decrement, setText } = this.props;
@@ -70,17 +71,23 @@ class App extends Component {
                })
            });
     */
+
+
+        console.log(this.location)
+
+
         return (
             <div>
                 <h1  >this is redux totu page </h1>
                 {/*  <h2 className="text-center mt-2">{store.getState()}</h2> */}
-               <h3 className="text-center mt-2">{this.props.count} </h3>
-                <h3 className="text-center mt-2"> {this.props.text}</h3>  
+                <h3 className="text-center mt-2">{this.props.count} </h3>
+                <h3 className="text-center mt-2"> {this.props.text}</h3>
+
 
                 <p className="text-center">
-                     <button className="btn btn-primary mr-2" onClick={() => increment()}>Increase</button>
+                    <button className="btn btn-primary mr-2" onClick={() => increment()}>Increase</button>
                     <button className="btn btn-danger  mr-2 " onClick={() => decrement()}>Decrease</button>
-                    <input className=" mr-2" type="text" onKeyUp={this.st} />  
+                    <input className=" mr-2" type="text" onKeyUp={this.st} />
 
                     {/* 
                    其他子组件 需要引入
@@ -116,12 +123,12 @@ class App extends Component {
 /*
     connect( fucntion,Action) connect会把Action里方法放到this.props里去
     Action =  import * as Action from '../Action';
-    action.js里的方法会返回 type:[value] (type的值) 这样src/Store.js里createStore(Reducer) 的Reducer 方法,会把 type的值 当作参数action.type 传入, 传入后计算出返回值 state ,  
+    action.js里的方法会返回 type:[value] (type的值) 然后, src/Store.js里createStore(Reducer) 的Reducer 方法,会把 type的值 当作参数action.type 传入, 传入后计算出返回值 statepp ,  
 */
 export default connect(
-    state => ({ //当然变量名字可以自己改
-        count: state.count,
-        text: state.text,
+    statepp => ({ //当然变量名字可以自己改
+        count: statepp.count,
+        text: statepp.text,
     }),
     Action
 )(App);

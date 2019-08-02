@@ -15,6 +15,8 @@ import "./css/style.css";
 import store from "./Store";
 import { Provider } from 'react-redux'
 
+ 
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -27,54 +29,70 @@ window.$ = window.jQuery = require('jquery');// 不加会报错 Bootstrap's Java
 /* 两种写法 class HeaderComponent extends Component function App() */
 
 
-function App(props) {
-
-  let pathroot = "/ReactJS-tuto/"
-
-  return (
-
-    <Provider store={store}> {/* 一定要传入 store={store} */}
-      <BrowserRouter basename="/ReactJS-tuto/">
-        <Route
-          render={({ location }) => (
-            <div   >{/* 一定要把全部东西包在 div 或其他一个标签里 */}
 
 
-              <HeaderComponent />
-              <div className="container  " >
+class App extends Component {
 
-                <TransitionGroup>
-                  <CSSTransition
-                    key={location.pathname}
-                    classNames="slide"
-                    timeout={300}
-                  >
-                    <Switch location={location}>
+  constructor(props) {
+    super(props)
 
-                      <Route exact path="/:page(\d+)?" component={BodyComponent} />
-                      <Route path="/contact/:msg(\d+)?" component={ContactComponent} />
-                      <Route path="/Messageb" component={Messageb} />
+    this.state = {
+    }
+  }
 
-                      <Route path="/about" component={About} />
-                      <Route path="/rt" component={Rt} />
-                      <Route component={Component404} />
-                      <Route render={() => <div>Not Found</div>} />
 
-                    </Switch>
-                  </CSSTransition>
-                </TransitionGroup>
+
+  render() {
+    let posf = "bbbbbbbbbbbbbbb" ;
+
+    return (
+
+      <Provider store={store}    > {/* 一定要传入 store={store} */}
+        <BrowserRouter basename="/ReactJS-tuto/"     >
+          <Route
+            render={({ location }) => (
+              <div   >{/* 一定要把全部东西包在 div 或其他一个标签里 */}
+
+
+                <HeaderComponent />
+                <div className="container  " >
+
+
+                  <TransitionGroup    >
+                    <CSSTransition
+                      key={location.pathname}
+                      classNames="slide"
+                      timeout={300}
+
+                    >
+                      <Switch location={location}   >
+
+                        <Route exact path="/:page(\d+)?" component={BodyComponent} />
+                        <Route path="/contact/:msg(\d+)?" component={ContactComponent} />
+                        <Route path="/Messageb" component={Messageb} />
+
+                        <Route path="/about" component={About} />
+                        <Route path='/rt' render={() => <Rt  posf={posf} />} />
+                        <Route component={Component404} />
+                        <Route render={() => <div>Not Found</div>} />
+
+                      </Switch>
+
+                    </CSSTransition>
+                  </TransitionGroup>
+                </div>
+                <FootComponent />
+
               </div>
-              <FootComponent />
-
-            </div>
-          )}
-        />
-      </BrowserRouter>
-    </Provider>
+            )}
+          />
+        </BrowserRouter>
+      </Provider>
 
 
 
-  );
+    )
+  }
 }
 
 

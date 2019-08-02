@@ -365,6 +365,7 @@ class Body extends Component {
             element = <h4>Oops , something goes wrong : {this.state.fetchError} </h4>
 
         }
+        
 
         return (
 
@@ -374,15 +375,14 @@ class Body extends Component {
             <div>
 
                 <h1> this is body of Home page  </h1>
-
-                <br />
+                 <br />
                  {element}  
-                {/* <Block title="title 1" content="content 1" />
+                 {/*  <Block title="title 1" content="content 1" />
                 <Block title="title 1" content="content 1" />
-                <Block2 title="title 2" content="content 2" />
-               <Block3 article={article} />
-                <Block4 title="title 4" content="content 4" show={true} />*/}
-
+                <Block2 title="title 2" content="content 2" /> */}
+              {/*  <Block3 article={article} /> */}
+{/*                 <Block4 title="title 4" content="content 4" show={true} /> 
+ */}
             </div>
 
         );

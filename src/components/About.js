@@ -1,22 +1,21 @@
 
-import React  , { Component }  from 'react';
- 
-class About extends  Component {
+import React, { Component } from 'react';
+
+class About extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+
         };
-         
-    } 
-  
-   // function
+
+    }
+
+    // function
     render() {
         // ...
         return (
             <div>
-            
-                        this is about page 
+                  this is about page
 
             </div>
 
@@ -26,6 +25,6 @@ class About extends  Component {
     }
 }
 
- 
+
 
 export default About;
